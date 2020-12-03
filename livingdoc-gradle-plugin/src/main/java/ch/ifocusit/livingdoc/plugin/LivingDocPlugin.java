@@ -1,19 +1,14 @@
 package ch.ifocusit.livingdoc.plugin;
 
-import ch.ifocusit.livingdoc.annotations.UbiquitousLanguage;
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo;
-import ch.ifocusit.livingdoc.plugin.diagram.PlantumlClassDiagramBuilder;
-import io.github.robwin.markup.builder.asciidoc.AsciiDocBuilder;
-import org.apache.commons.lang3.NotImplementedException;
-import org.apache.commons.lang3.StringUtils;
-
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-public class DiagramPlugin implements Plugin<Project> {
+public class LivingDocPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
-        System.out.println("I am applied");
+        project.getExtensions().create("livingDocSettings", LivingDocPluginExtension.class);
+        // project.getTasks().create("demo", DemoTask.class);
+        System.out.println("I am applied v2");
     }
 //    @Override
 //    protected String getOutputFilename() {

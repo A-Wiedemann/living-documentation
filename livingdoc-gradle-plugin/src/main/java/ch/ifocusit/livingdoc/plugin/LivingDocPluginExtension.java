@@ -6,7 +6,7 @@ import ch.ifocusit.livingdoc.plugin.domain.Color;
 import java.io.File;
 import java.util.List;
 
-public class DiagramPluginExtension {
+public class LivingDocPluginExtension {
     private static final Color DEFAULT_ROOT_COLOR = Color.from("wheat", null);
 
     private String[] excludes = new String[0];
@@ -66,7 +66,11 @@ public class DiagramPluginExtension {
      */
     private File diagramFooter;
 
-    private boolean interactive;
+    public boolean isInteractive() {
+        return interactive;
+    }
+
+    private boolean interactive = true;
 
     private String diagramOutputFilename;
 
