@@ -1,21 +1,29 @@
 package ch.ifocusit.livingdoc.plugin;
 
-import org.gradle.api.DefaultTask;
+import ch.ifocusit.livingdoc.annotations.UbiquitousLanguage;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractDocsGeneratorTask;
+import ch.ifocusit.livingdoc.plugin.diagram.PlantumlClassDiagramBuilder;
+import io.github.robwin.markup.builder.asciidoc.AsciiDocBuilder;
 import org.gradle.api.tasks.TaskAction;
 
-public class DiagramTask extends DefaultTask {
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.stream.Stream;
+
+public class DiagramTask extends AbstractDocsGeneratorTask {
     private boolean diagramWithLink;
-    private
+    private LivingDocPluginExtension.DiagramImageType diagramImageType;
+    private LivingDocPluginExtension extension;
 
     @TaskAction
     public void execute() {
-        LivingDocPluginExtension extension = getProject().getExtensions().findByType(LivingDocPluginExtension.class);
+        extension = getProject().getExtensions().findByType(LivingDocPluginExtension.class);
         if (extension == null) {
             extension = new LivingDocPluginExtension();
         }
         if (extension.isInteractive()) {
             diagramWithLink = true;
-            diagramImageType = DiagramMojo.DiagramImageType.svg;
+            diagramImageType = LivingDocPluginExtension.DiagramImageType.svg;
         }
         // generate diagram
         String diagram = generateDiagram();
@@ -32,7 +40,7 @@ public class DiagramTask extends DefaultTask {
                 AsciiDocBuilder asciiDocBuilder = this.createAsciiDocBuilder();
                 appendTitle(asciiDocBuilder);
 
-                switch (diagramType) {
+                switch (extension.getDiagramType()) {
                     case plantuml:
                         asciiDocBuilder.textLine(String.format("[plantuml, %s, format=%s, opts=interactive]",
                                 getOutputFilename(), diagramImageType));
@@ -45,31 +53,51 @@ public class DiagramTask extends DefaultTask {
                 break;
 
             case plantuml:
-                write(diagram, getOutput(getOutputFilename(), AbstractAsciidoctorMojo.Format.plantuml));
+                write(diagram, getOutput(getOutputFilename(), Format.plantuml));
         }
     }
 
-    String generateDiagram() throws MojoExecutionException {
+    @Override
+    public void executeTask() {
 
-        getLog().info("generate diagram with packageRoot=" + packageRoot);
+    }
 
-        if (diagramType == DiagramMojo.DiagramType.plantuml) {
-            PlantumlClassDiagramBuilder builder = new PlantumlClassDiagramBuilder(project, packageRoot,
-                    Stream.of(excludes).map(s -> s.replaceAll("\n", "").replaceAll("\r", "").replaceAll(" ", ""))
-                            .toArray(String[]::new),
-                    rootAggregateClassMatcher,
-                    rootAggregateColor == null || rootAggregateColor.isEmpty() ? DEFAULT_ROOT_COLOR
-                            : rootAggregateColor,
-                    diagramHeader, diagramFooter, diagramShowMethods, diagramShowFields, diagramWithDependencies,
-                    diagramLinkPage);
-            if (onlyAnnotated) {
-                builder.filterOnAnnotation(UbiquitousLanguage.class);
-            }
-            if (diagramWithLink && !DiagramMojo.DiagramImageType.png.equals(diagramImageType)) {
-                builder.mapNames(glossaryMapping);
-            }
-            return builder.generate();
+    String generateDiagram() {
+
+        // getLog().info("generate diagram with packageRoot=" + packageRoot);
+
+        PlantumlClassDiagramBuilder builder = new PlantumlClassDiagramBuilder(
+                project,
+                packageRoot,
+                Stream.of(extension.getExcludes())
+                        .map(s -> s.replaceAll("\n", "").replaceAll("\r", "").replaceAll(" ", ""))
+                        .toArray(String[]::new),
+                extension.getRootAggregateClassMatcher(),
+                extension.getRootAggregateColor() == null || extension.getRootAggregateColor().isEmpty()
+                        ? extension.getDefaultRootColor()
+                        : extension.getRootAggregateColor(),
+                extension.getDiagramHeader(),
+                extension.getDiagramFooter(),
+                extension.isDiagramShowMethods(),
+                extension.isDiagramShowFields(),
+                extension.isDiagramWithDependencies(),
+                extension.getDiagramLinkPage());
+        if (onlyAnnotated) {
+            builder.filterOnAnnotation(UbiquitousLanguage.class);
         }
-        throw new NotImplementedException(String.format("format %s is not implemented yet", diagramType));
+        if (diagramWithLink && !LivingDocPluginExtension.DiagramImageType.png.equals(diagramImageType)) {
+            builder.mapNames(glossaryMapping);
+        }
+        return builder.generate();
+    }
+
+    @Override
+    protected String getOutputFilename() {
+        return null;
+    }
+
+    @Override
+    protected String getTitle() {
+        return null;
     }
 }

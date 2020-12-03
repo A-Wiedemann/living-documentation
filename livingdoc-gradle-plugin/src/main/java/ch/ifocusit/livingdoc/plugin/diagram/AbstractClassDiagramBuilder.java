@@ -34,9 +34,6 @@ import java.util.function.Predicate;
 
 import com.google.common.reflect.ClassPath;
 
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
-
 import ch.ifocusit.livingdoc.annotations.UbiquitousLanguage;
 import ch.ifocusit.livingdoc.plugin.mapping.GlossaryNamesMapper;
 import ch.ifocusit.livingdoc.plugin.utils.AnchorUtil;
@@ -45,6 +42,8 @@ import ch.ifocusit.livingdoc.plugin.utils.ClassLoaderUtil;
 import ch.ifocusit.plantuml.classdiagram.LinkMaker;
 import ch.ifocusit.plantuml.classdiagram.NamesMapper;
 import ch.ifocusit.plantuml.classdiagram.model.Link;
+import org.gradle.api.GradleException;
+import org.gradle.api.Project;
 
 /**
  * @author Julien Boz
@@ -55,7 +54,7 @@ public abstract class AbstractClassDiagramBuilder implements LinkMaker, NamesMap
     private static final String IT = "IT";
     private static final String PACKAGE_INFO = "package-info";
 
-    protected final MavenProject project;
+    protected final Project project;
     protected final String prefix;
     protected final String[] excludes;
     protected final File header;
@@ -65,7 +64,7 @@ public abstract class AbstractClassDiagramBuilder implements LinkMaker, NamesMap
 
     protected NamesMapper namesMapper = this;
 
-    public AbstractClassDiagramBuilder(MavenProject project, String prefix, String[] excludes, File header, File footer,
+    public AbstractClassDiagramBuilder(Project project, String prefix, String[] excludes, File header, File footer,
                                        boolean diagramWithDependencies, String linkPage) {
         this.project = project;
         this.prefix = prefix;
@@ -78,13 +77,13 @@ public abstract class AbstractClassDiagramBuilder implements LinkMaker, NamesMap
 
     public abstract void filterOnAnnotation(Class<? extends Annotation> annotation);
 
-    public abstract String generate() throws MojoExecutionException;
+    public abstract String generate();
 
-    protected String readHeader() throws MojoExecutionException {
+    protected String readHeader() {
         return read(header);
     }
 
-    protected String readFooter() throws MojoExecutionException {
+    protected String readFooter() {
         return read(footer);
     }
 
@@ -97,19 +96,19 @@ public abstract class AbstractClassDiagramBuilder implements LinkMaker, NamesMap
                 && stream(excludes).noneMatch(excl -> ci.getName().matches(excl));
     }
 
-    protected ClassPath initClassPath() throws MojoExecutionException {
+    protected ClassPath initClassPath() {
         try {
             return ClassPath.from(ClassLoaderUtil.getRuntimeClassLoader(project));
         } catch (IOException e) {
-            throw new MojoExecutionException("Unable to initialize classPath !", e);
+            throw new GradleException("Unable to initialize classPath !", e);
         }
     }
 
-    public void mapNames(File mappings) throws MojoExecutionException {
+    public void mapNames(File mappings) {
         try {
             namesMapper = new GlossaryNamesMapper<>(mappings, UbiquitousLanguage.class);
         } catch (IOException e) {
-            throw new MojoExecutionException("error reading mappings file", e);
+            throw new GradleException("error reading mappings file", e);
         }
     }
 

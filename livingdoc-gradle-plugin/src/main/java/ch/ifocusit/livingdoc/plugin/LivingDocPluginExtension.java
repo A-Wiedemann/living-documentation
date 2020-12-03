@@ -9,12 +9,24 @@ import java.util.List;
 public class LivingDocPluginExtension {
     private static final Color DEFAULT_ROOT_COLOR = Color.from("wheat", null);
 
+    public String[] getExcludes() {
+        return excludes;
+    }
+
     private String[] excludes = new String[0];
+
+    public DiagramType getDiagramType() {
+        return diagramType;
+    }
 
     /**
      * Output diagram format
      */
     private DiagramType diagramType = DiagramType.plantuml;
+
+    public DiagramImageType getDiagramImageType() {
+        return diagramImageType;
+    }
 
     /**
      * Output diagram image format
@@ -31,10 +43,14 @@ public class LivingDocPluginExtension {
      */
     private String diagramLinkPage = "glossary.html";
 
+    public String getRootAggregateClassMatcher() {
+        return rootAggregateClassMatcher;
+    }
+
     /**
      * Define the root aggregare class.
      */
-    private String rootAggregateClassMatcher;
+    private String rootAggregateClassMatcher = "livingdoc.diagram.rootAggregate.class";
 
     /**
      * Class color for @{@link ch.ifocusit.livingdoc.annotations.RootAggregate}
@@ -51,6 +67,58 @@ public class LivingDocPluginExtension {
      * Effective cluster list.
      */
     private List<Cluster> clusters;
+
+    public static Color getDefaultRootColor() {
+        return DEFAULT_ROOT_COLOR;
+    }
+
+    public boolean isDiagramWithLink() {
+        return diagramWithLink;
+    }
+
+    public String getDiagramLinkPage() {
+        return diagramLinkPage;
+    }
+
+    public Color getRootAggregateColor() {
+        return rootAggregateColor;
+    }
+
+    public boolean isDetectCluster() {
+        return detectCluster;
+    }
+
+    public List<Cluster> getClusters() {
+        return clusters;
+    }
+
+    public boolean isDiagramShowMethods() {
+        return diagramShowMethods;
+    }
+
+    public boolean isDiagramShowFields() {
+        return diagramShowFields;
+    }
+
+    public File getDiagramHeader() {
+        return diagramHeader;
+    }
+
+    public File getDiagramFooter() {
+        return diagramFooter;
+    }
+
+    public String getDiagramOutputFilename() {
+        return diagramOutputFilename;
+    }
+
+    public String getDiagramTitle() {
+        return diagramTitle;
+    }
+
+    public boolean isDiagramWithDependencies() {
+        return diagramWithDependencies;
+    }
 
     private boolean diagramShowMethods = true;
 

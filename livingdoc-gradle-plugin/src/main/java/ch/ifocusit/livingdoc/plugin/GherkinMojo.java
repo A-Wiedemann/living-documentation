@@ -22,7 +22,7 @@
  */
 package ch.ifocusit.livingdoc.plugin;
 
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractDocsGeneratorMojo;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractDocsGeneratorMojo;
 import com.github.domgold.doctools.asciidoctor.gherkin.MapFormatter;
 import io.github.robwin.markup.builder.asciidoc.AsciiDocBuilder;
 import org.apache.commons.io.FileUtils;

@@ -33,7 +33,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractGlossaryMojo;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractGlossaryMojo;
 import ch.ifocusit.livingdoc.plugin.glossary.JavaClass;
 import ch.ifocusit.livingdoc.plugin.utils.MustacheUtil;
 
@@ -42,44 +42,44 @@ import ch.ifocusit.livingdoc.plugin.utils.MustacheUtil;
  *
  * @author Julien Boz
  */
-@Mojo(name = "dictionary", requiresDependencyResolution = ResolutionScope.RUNTIME_PLUS_SYSTEM, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
-public class DictionaryMojo extends AbstractGlossaryMojo {
-    private static final String DEFAULT_DICTIONARY_TEMPLATE_MUSTACHE = "/default_dictionary_template.mustache";
-
-    @Parameter(property = "livingdoc.dictionary.output.filename", defaultValue = "dictionary", required = true)
-    private String dictionaryOutputFilename;
-
-    @Parameter(property = "livingdoc.dictionary.title")
-    private String dictionaryTitle;
-
-    @Parameter(property = "livingdoc.dictionary.link.activate", defaultValue = "true")
-    private boolean dictionaryWithLink;
-
-    @Parameter(property = "livingdoc.dictionary.template")
-    private File dictionaryTemplate;
-
-    @Override
-    protected String getOutputFilename() {
-        return dictionaryOutputFilename;
-    }
-
-    @Override
-    protected String getTitle() {
-        return dictionaryTitle;
-    }
-
-    @Override
-    protected void executeGlossaryMojo() throws Exception {
-        List<JavaClass> classes = getClasses().map(javaClass -> JavaClass.from(javaClass, this::hasAnnotation,
-                getClasses().collect(Collectors.toList()), this)).sorted().collect(Collectors.toList());
-
-        Map<String, Object> scopes = new HashMap<>();
-        scopes.put("classes", classes);
-        scopes.put("withLink", dictionaryWithLink);
-
-        asciiDocBuilder
-                .textLine(MustacheUtil.execute(dictionaryTemplate, DEFAULT_DICTIONARY_TEMPLATE_MUSTACHE, scopes));
-
-        somethingWasGenerated = !classes.isEmpty();
-    }
-}
+//@Mojo(name = "dictionary", requiresDependencyResolution = ResolutionScope.RUNTIME_PLUS_SYSTEM, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
+//public class DictionaryMojo extends AbstractGlossaryMojo {
+//    private static final String DEFAULT_DICTIONARY_TEMPLATE_MUSTACHE = "/default_dictionary_template.mustache";
+//
+//    @Parameter(property = "livingdoc.dictionary.output.filename", defaultValue = "dictionary", required = true)
+//    private String dictionaryOutputFilename;
+//
+//    @Parameter(property = "livingdoc.dictionary.title")
+//    private String dictionaryTitle;
+//
+//    @Parameter(property = "livingdoc.dictionary.link.activate", defaultValue = "true")
+//    private boolean dictionaryWithLink;
+//
+//    @Parameter(property = "livingdoc.dictionary.template")
+//    private File dictionaryTemplate;
+//
+////    @Override
+////    protected String getOutputFilename() {
+////        return dictionaryOutputFilename;
+////    }
+//
+//    @Override
+//    protected String getTitle() {
+//        return dictionaryTitle;
+//    }
+//
+//    @Override
+//    protected void executeGlossaryMojo() throws Exception {
+//        List<JavaClass> classes = getClasses().map(javaClass -> JavaClass.from(javaClass, this::hasAnnotation,
+//                getClasses().collect(Collectors.toList()), this)).sorted().collect(Collectors.toList());
+//
+//        Map<String, Object> scopes = new HashMap<>();
+//        scopes.put("classes", classes);
+//        scopes.put("withLink", dictionaryWithLink);
+//
+//        asciiDocBuilder
+//                .textLine(MustacheUtil.execute(dictionaryTemplate, DEFAULT_DICTIONARY_TEMPLATE_MUSTACHE, scopes));
+//
+//        somethingWasGenerated = !classes.isEmpty();
+//    }
+//}

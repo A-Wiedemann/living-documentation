@@ -22,7 +22,7 @@
  */
 package ch.ifocusit.livingdoc.plugin;
 
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo;
 import ch.ifocusit.livingdoc.plugin.domain.Publish;
 import ch.ifocusit.livingdoc.plugin.publish.HtmlPostProcessor;
 import ch.ifocusit.livingdoc.plugin.publish.PublishProvider;

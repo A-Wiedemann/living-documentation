@@ -22,7 +22,7 @@
  */
 package ch.ifocusit.livingdoc.plugin.utils;
 
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo.Format;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorTask.Format;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.asciidoctor.Asciidoctor;

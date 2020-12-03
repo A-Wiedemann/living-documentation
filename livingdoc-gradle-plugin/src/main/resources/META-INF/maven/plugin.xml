@@ -134,7 +134,7 @@
         </parameter>
         <parameter>
           <name>format</name>
-          <type>ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format</type>
+          <type>ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format</type>
           <required>false</required>
           <editable>true</editable>
           <description>Output format of the glossary (default html, others : adoc)</description>
@@ -203,7 +203,7 @@
         <diagramType implementation="ch.ifocusit.livingdoc.plugin.DiagramMojo$DiagramType" default-value="plantuml">${livingdoc.diagram.type}</diagramType>
         <diagramWithDependencies implementation="boolean" default-value="false">${livingdoc.diagram.withDeps}</diagramWithDependencies>
         <diagramWithLink implementation="boolean" default-value="true">${livingdoc.diagram.link.activate}</diagramWithLink>
-        <format implementation="ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
+        <format implementation="ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
         <generatedDocsDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-docs">${livingdoc.output.directory}</generatedDocsDirectory>
         <glossaryMapping implementation="java.io.File">${livingdoc.diagram.glossary.mapping}</glossaryMapping>
         <interactive implementation="boolean" default-value="false">${livingdoc.diagram.interactive}</interactive>
@@ -279,7 +279,7 @@
         </parameter>
         <parameter>
           <name>format</name>
-          <type>ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format</type>
+          <type>ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format</type>
           <required>false</required>
           <editable>true</editable>
           <description>Output format of the glossary (default html, others : adoc)</description>
@@ -333,7 +333,7 @@
         <dictionaryTemplate implementation="java.io.File">${livingdoc.dictionary.template}</dictionaryTemplate>
         <dictionaryTitle implementation="java.lang.String">${livingdoc.dictionary.title}</dictionaryTitle>
         <dictionaryWithLink implementation="boolean" default-value="true">${livingdoc.dictionary.link.activate}</dictionaryWithLink>
-        <format implementation="ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
+        <format implementation="ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
         <generatedDocsDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-docs">${livingdoc.output.directory}</generatedDocsDirectory>
         <glossaryMapping implementation="java.io.File">${livingdoc.diagram.glossary.mapping}</glossaryMapping>
         <onlyAnnotated implementation="boolean" default-value="false">${livingdoc.diagram.onlyAnnotated}</onlyAnnotated>
@@ -379,7 +379,7 @@
         </parameter>
         <parameter>
           <name>format</name>
-          <type>ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format</type>
+          <type>ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format</type>
           <required>false</required>
           <editable>true</editable>
           <description>Output format of the glossary (default html, others : adoc)</description>
@@ -444,7 +444,7 @@
       <configuration>
         <asciidocTemplates implementation="java.io.File" default-value="${project.build.directory}/asciidoc-templates">${livingdoc.asciidocTemplate}</asciidocTemplates>
         <features implementation="java.util.List" default-value="${project.basedir}/src/test/resources/features">${livingdoc.gherkin.features}</features>
-        <format implementation="ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
+        <format implementation="ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
         <generatedDocsDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-docs">${livingdoc.output.directory}</generatedDocsDirectory>
         <gerkinSeparateFeature implementation="boolean" default-value="false">${livingdoc.gherkin.separate}</gerkinSeparateFeature>
         <gherkinOptions implementation="java.lang.String">${livingdoc.gherkin.options}</gherkinOptions>
@@ -493,7 +493,7 @@
         </parameter>
         <parameter>
           <name>format</name>
-          <type>ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format</type>
+          <type>ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format</type>
           <required>false</required>
           <editable>true</editable>
           <description>Output format of the glossary (default html, others : adoc)</description>
@@ -578,7 +578,7 @@
       </parameters>
       <configuration>
         <asciidocTemplates implementation="java.io.File" default-value="${project.build.directory}/asciidoc-templates">${livingdoc.asciidocTemplate}</asciidocTemplates>
-        <format implementation="ch.ifocusit.livingdoc.plugin.baseMojo.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
+        <format implementation="ch.ifocusit.livingdoc.plugin.baseTask.AbstractAsciidoctorMojo$Format" default-value="html">${livingdoc.diagram.output.format}</format>
         <generatedDocsDirectory implementation="java.io.File" default-value="${project.build.directory}/generated-docs">${livingdoc.output.directory}</generatedDocsDirectory>
         <glossaryColumnsName implementation="java.lang.String" default-value="Id|Object Name|Attribute name|Type|Description|Constraints|Default Value">${livingdoc.glossary.columns}</glossaryColumnsName>
         <glossaryMapping implementation="java.io.File">${livingdoc.diagram.glossary.mapping}</glossaryMapping>

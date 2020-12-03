@@ -35,8 +35,7 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
+import org.gradle.api.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,9 +57,9 @@ public class PlantumlClassDiagramBuilder extends AbstractClassDiagramBuilder {
     private boolean showMethods;
     private boolean showFields;
 
-    public PlantumlClassDiagramBuilder(MavenProject project, String prefix, String[] excludes,
-            String rootAggregateClassMatcher, Color rootAggregateColor, File header, File footer, boolean showMethods,
-            boolean showFields, boolean diagramWithDependencies, String linkPage) {
+    public PlantumlClassDiagramBuilder(Project project, String prefix, String[] excludes,
+                                       String rootAggregateClassMatcher, Color rootAggregateColor, File header, File footer, boolean showMethods,
+                                       boolean showFields, boolean diagramWithDependencies, String linkPage) {
         super(project, prefix, excludes, header, footer, diagramWithDependencies, linkPage);
 
         this.showMethods = showMethods;
@@ -88,7 +87,7 @@ public class PlantumlClassDiagramBuilder extends AbstractClassDiagramBuilder {
         };
     }
 
-    public String generate() throws MojoExecutionException {
+    public String generate() {
         final ClassPath classPath = initClassPath();
         final Set<ClassInfo> allClasses = classPath.getTopLevelClassesRecursive(prefix);
 
@@ -110,7 +109,7 @@ public class PlantumlClassDiagramBuilder extends AbstractClassDiagramBuilder {
     }
 
     @Override
-    protected String readHeader() throws MojoExecutionException {
+    protected String readHeader() {
         String header = super.readHeader();
         header += showFields ? StringUtils.EMPTY : ("hide fields" + NEWLINE);
         header += showMethods ? StringUtils.EMPTY : ("hide methods" + NEWLINE);

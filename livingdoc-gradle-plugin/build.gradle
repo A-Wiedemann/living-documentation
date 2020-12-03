@@ -3,6 +3,7 @@
  */
 
 plugins {
+    id 'java-gradle-plugin'
     id 'java'
     id 'maven-publish'
 }
@@ -18,7 +19,6 @@ repositories {
 }
 
 dependencies {
-    compile gradleApi()
     implementation 'org.apache.maven:maven-plugin-api:3.3.9'
     implementation 'ch.ifocusit.livingdoc:livingdoc-annotations:1.10'
     implementation 'org.simpleflatmapper:sfm-csv:3.11.6'

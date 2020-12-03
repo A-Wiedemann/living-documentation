@@ -35,7 +35,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
-import ch.ifocusit.livingdoc.plugin.baseMojo.AbstractGlossaryMojo;
+import ch.ifocusit.livingdoc.plugin.baseTask.AbstractGlossaryMojo;
 import ch.ifocusit.livingdoc.plugin.glossary.JavaClass;
 import ch.ifocusit.livingdoc.plugin.utils.MustacheUtil;
 
